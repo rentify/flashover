@@ -70,7 +70,7 @@ class Flashover
   end
 
   def parse_message(message)
-    ActiveSupport::HashWithIndifferentAccess.new JSON.parse(decrypt message)
+    JSON.parse(decrypt message)
   end
 
   def build_message_from_payload(payload)
