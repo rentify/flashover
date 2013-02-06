@@ -6,7 +6,7 @@ describe Flashover do
       redis = Object.new
       redis.should_receive(:publish).with("flashover:pubsub:test:sms", anything) { true }
 
-      flashover = Flashover.new redis, "password"
+      flashover = Flashover.new redis, "password", "saltsalt"
       flashover.sms "hello" => "world"
     end
 
@@ -16,7 +16,7 @@ describe Flashover do
       redis = Object.new
       redis.should_receive(:publish).with("flashover:pubsub:test:sms", anything) { true }
 
-      flashover = Flashover.new redis, "password"
+      flashover = Flashover.new redis, "password", "saltsalt"
       flashover.sms "hello" => "world"
     end
   end

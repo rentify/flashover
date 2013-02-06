@@ -4,7 +4,7 @@ class Airbrake
   class << self
 
     @@exceptions = []
-    
+
     def notify exception
       @@exceptions << exception
     end
@@ -12,8 +12,5 @@ class Airbrake
 end
 
 require "json"
-require "rails"
-
-Rails.logger = Logger.new "/dev/null"
 
 ENV["RAILS_ENV"] = "test"

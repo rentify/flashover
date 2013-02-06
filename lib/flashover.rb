@@ -1,5 +1,6 @@
 require "json"
 require "redis"
+require "openssl"
 
 class Flashover
 
@@ -34,11 +35,11 @@ class Flashover
       true
     rescue Errno::ETIMEDOUT => ex
       Airbrake.notify(ex)
-      Rails.logger.error "Flashover TIMEOUT @ #{Time.now.ctime}"
+      logger "Flashover TIMEOUT @ #{Time.now.ctime}"
       false
     rescue => ex
       Airbrake.notify(ex)
-      Rails.logger.error "BANG @ Flashover#event => #{ex.class} -> '#{ex.message}'"
+      logger "BANG @ Flashover#event => #{ex.class} -> '#{ex.message}'"
       false
     end
   end
@@ -97,6 +98,14 @@ class Flashover
 
   def environment
     @environment || ENV["FLASHOVER_ENV"] || ENV["RAILS_ENV"] || "development"
+  end
+
+  def logger(message)
+    if defined? Rails
+      Rails.logger.error message
+    else
+      $stderr.puts message
+    end
   end
 
   class Crypto
