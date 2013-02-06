@@ -1,3 +1,6 @@
+require "json"
+require "redis"
+
 class Flashover
 
   VERSION = "0.0.1"
