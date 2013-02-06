@@ -1,4 +1,5 @@
 require 'rubygems'
+require './env'
 require 'rake'
 require 'date'
 
