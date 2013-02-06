@@ -105,7 +105,7 @@ class Flashover
     end
 
     def encrypt plaintext
-      encryptor = OpenSSL::Cipher::Cipher.new 'AES-128-CBC'
+      encryptor = OpenSSL::Cipher::Cipher.new 'AES-256-CBC'
       encryptor.encrypt
       encryptor.pkcs5_keyivgen @passphrase, @salt
 
@@ -114,7 +114,7 @@ class Flashover
     end
 
     def decrypt ciphertext
-      decryptor = OpenSSL::Cipher::Cipher.new 'AES-128-CBC'
+      decryptor = OpenSSL::Cipher::Cipher.new 'AES-256-CBC'
       decryptor.decrypt
       decryptor.pkcs5_keyivgen @passphrase, @salt
 
