@@ -1,4 +1,7 @@
 class Flashover
+
+  VERSION = "0.0.1"
+
   MESSAGE_TYPES = [
     :sms,
     :phone,
