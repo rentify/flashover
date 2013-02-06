@@ -8,8 +8,8 @@ Gem::Specification.new do |s|
   ## the sub! line in the Rakefile
   s.name              = 'flashover'
   s.version           = '0.0.1'
-  s.date              = '2010-01-01'
-  # s.rubyforge_project = 'NAME'
+  s.date              = '2013-02-06'
+  # s.rubyforge_project = 'flashover'
 
   ## Make sure your summary is short. The description may be as long
   ## as you like.
@@ -36,11 +36,25 @@ Gem::Specification.new do |s|
   ## that are needed for an end user to actually USE your code.
   s.add_dependency('redis', [">= 3.0.2"])
 
+  s.add_development_dependency('rake', [">= 10.0.0"])
+  s.add_development_dependency('rspec')
+
   ## Leave this section as-is. It will be automatically generated from the
   ## contents of your Git repository via the gemspec task. DO NOT REMOVE
   ## THE MANIFEST COMMENTS, they are used as delimiters by the task.
   # = MANIFEST =
-  s.files = %w[]
+  s.files = %w[
+    Gemfile
+    Gemfile.lock
+    LICENSE
+    README
+    Rakefile
+    env.rb
+    flashover.gemspec
+    lib/flashover.rb
+    spec/flashover_spec.rb
+    spec/spec_helper.rb
+  ]
   # = MANIFEST =
 
   ## Test files will be grabbed from the file list. Make sure the path glob
