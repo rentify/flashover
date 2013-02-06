@@ -31,7 +31,7 @@ class Flashover
       true
     rescue Errno::ETIMEDOUT => ex
       Airbrake.notify(ex)
-      Rails.logger.error "KRAKEN TIMEOUT @ #{Time.now.ctime}"
+      Rails.logger.error "Flashover TIMEOUT @ #{Time.now.ctime}"
       false
     rescue => ex
       Airbrake.notify(ex)
