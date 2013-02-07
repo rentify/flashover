@@ -17,9 +17,9 @@ class Flashover
 
   attr_accessor :redis, :environment
 
-  def initialize redis, passphrase, salt
+  def initialize(redis, passphrase, salt)
     @redis = redis
-    @crypto = Crypto.new passphrase, salt
+    @crypto = Crypto.new(passphrase, salt)
   end
 
   # 'type' dictates the message pipeline payload is shoved down
@@ -29,7 +29,7 @@ class Flashover
   # -> :email
   # -> :page_view
   # -> :generic
-  def event type, payload
+  def event(type, payload)
     begin
       @redis.publish(convert_symbol_to_channel(type), build_payload(payload))
       true
@@ -55,8 +55,8 @@ class Flashover
   end
 
   MESSAGE_TYPES.each do |message_type|
-    define_method message_type do |payload|
-      event message_type, payload
+    define_method(message_type) do |payload|
+      event(message_type, payload)
     end
   end
 
@@ -81,18 +81,17 @@ class Flashover
     encrypt JSON.generate(payload)
   end
 
-
   def redis_message_types
     @redis_message_types ||= MESSAGE_TYPES.map do |message_type|
       "flashover:pubsub:#{environment}:#{message_type.to_s}"
     end
   end
 
-  def convert_channel_to_symbol channel
+  def convert_channel_to_symbol(channel)
     channel.split(":").last.to_sym
   end
 
-  def convert_symbol_to_channel symbol
+  def convert_symbol_to_channel(symbol)
     "flashover:pubsub:#{environment}:#{symbol.to_s}"
   end
 
@@ -119,7 +118,7 @@ class Flashover
     def encrypt plaintext
       encryptor = OpenSSL::Cipher::Cipher.new 'AES-256-CBC'
       encryptor.encrypt
-      encryptor.pkcs5_keyivgen @passphrase, @salt
+      encryptor.pkcs5_keyivgen(@passphrase, @salt)
 
       encrypted = encryptor.update plaintext
       encrypted << encryptor.final
@@ -128,7 +127,7 @@ class Flashover
     def decrypt ciphertext
       decryptor = OpenSSL::Cipher::Cipher.new 'AES-256-CBC'
       decryptor.decrypt
-      decryptor.pkcs5_keyivgen @passphrase, @salt
+      decryptor.pkcs5_keyivgen(@passphrase, @salt)
 
       decrypted = decryptor.update ciphertext
       decrypted << decryptor.final
