@@ -44,12 +44,17 @@ class Flashover
     end
   end
 
-  def listen &blk
+  def listen(listening_channel = nil, &blk)
     raise MaryPoppins.new("block must have two args") unless blk.arity == 2
 
     @redis.subscribe(redis_message_types) do |on|
       on.message do |channel, message|
-        yield convert_channel_to_symbol(channel), parse_message(message)
+        channel = convert_channel_to_symbol(channel)
+        if listening_channel
+          yield(channel, parse_message(message)) if listening_channel == channel
+        else
+          yield(channel, parse_message(message))
+        end
       end
     end
   end
