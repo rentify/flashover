@@ -12,7 +12,8 @@ class Flashover
     :email,
     :page_view,
     :generic,
-    :backup
+    :backup,
+    :notification
   ].freeze
 
   attr_accessor :redis, :environment
