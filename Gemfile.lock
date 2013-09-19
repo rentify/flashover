@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    flashover (0.0.5)
+    flashover (0.0.6)
       redis (>= 3.0.2)
 
 GEM
