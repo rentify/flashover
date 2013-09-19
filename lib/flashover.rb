@@ -35,11 +35,11 @@ class Flashover
       @redis.publish(convert_symbol_to_channel(type), build_payload(payload))
       true
     rescue Errno::ETIMEDOUT => ex
-      Airbrake.notify(ex)
+      Bugsnag.notify(ex)
       logger "Flashover TIMEOUT @ #{Time.now.ctime}"
       false
     rescue => ex
-      Airbrake.notify(ex)
+      Bugsnag.notify(ex)
       logger "BANG @ Flashover#event => #{ex.class} -> '#{ex.message}'"
       false
     end

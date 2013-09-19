@@ -1,6 +1,6 @@
 Dir.glob("./lib/**/*.rb").each{ |f| require f }
 
-class Airbrake
+class Bugsnag
   class << self
 
     @@exceptions = []
