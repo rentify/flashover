@@ -4,7 +4,7 @@ require "openssl"
 
 class Flashover
 
-  VERSION = "0.0.4"
+  VERSION = "0.0.5"
 
   MESSAGE_TYPES = [
     :sms,
