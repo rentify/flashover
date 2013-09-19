@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   ## the sub! line in the Rakefile
   s.name              = 'flashover'
   s.version           = '0.0.4'
-  s.date              = '2013-02-22'
+  s.date              = '2013-09-19'
   # s.rubyforge_project = 'flashover'
 
   ## Make sure your summary is short. The description may be as long
