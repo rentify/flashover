@@ -46,7 +46,7 @@ class Flashover
   end
 
   def listen(listening_channel = nil, &blk)
-    raise MaryPoppins.new("block must have two args") unless blk.arity == 2
+    raise Flashover::Error.new("block must have two args") unless blk.arity == 2
 
     @redis.subscribe(redis_message_types) do |on|
       on.message do |channel, message|
@@ -116,7 +116,7 @@ class Flashover
   class Crypto
 
     def initialize(passphrase, salt)
-      raise MaryPoppins.new("salt needs to be 8 chars long") unless salt.length == 8
+      raise Flashover::Error.new("salt needs to be 8 chars long") unless salt.length == 8
       @passphrase = passphrase
       @salt = salt
     end
@@ -140,5 +140,5 @@ class Flashover
     end
   end
 
-  class MaryPoppins < StandardError; end
+  class Error < StandardError; end
 end
